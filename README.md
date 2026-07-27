@@ -45,6 +45,10 @@ After measuring the different loads, I measured their efficiency based on power 
 
 <img width="1106" height="477" alt="image" src="https://github.com/user-attachments/assets/80e50989-50b2-4e68-b1a1-6a39ef03a5ed" />
 
-The trend in the graph shows how increasing the load draw will decrease the efficiency as expected, but the efficiency is maintained at above about 89%. 
+The value of efficiency was calculated with the formula \frac{V_{out} \cdot I_{out}}{V_{in} \cdot I_{in}} and used to determine how the load affects the effiicency of the circuit. The trend in the graph shows how increasing the load draw will decrease the efficiency as expected, but the efficiency is maintained at above about 89%. 
 
-
+## How to Run
+1. Download LTSpice from Analog Devices
+2. Clone or download this repository
+3. Open the 'asc' schematic file in LTSpice and run the following simulations for each section
+   * 
