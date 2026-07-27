@@ -21,7 +21,7 @@ I first simulated the circuit against a resistance of 1.67 ohms to measure the o
 
 <img width="621" height="469" alt="image" src="https://github.com/user-attachments/assets/fc47b69d-37a5-4b44-a21f-b574706fb6ad" />
 
-This zoomed in image of the current shows that it has a variation of about 0.5A, and stays under the 3.6 Amps that the components are rated for. The expected ripple current can be calculated using $$\frac{(V_{in} - V_{out})\cdotV_{out}}{V_{in}\cdotL\cdotf_{switching}}$$ which, when values are plugged in, comes to 0.511 Amps. This expected value matches the value acquired from the graph.
+This zoomed in image of the current shows that it has a variation of about 0.5A, and stays under the 3.6 Amps that the components are rated for. The expected ripple current can be calculated using $$\frac{(V_{in} - V_{out}) \cdot V_{out}}{V_{in} \cdot L \cdot f_{switching}}$$ which, when values are plugged in, comes to 0.511 Amps. This expected value matches the value acquired from the graph.
 
 <img width="1894" height="434" alt="image" src="https://github.com/user-attachments/assets/960cee73-59df-4772-a02c-dbfba25c0ffb" />
 
