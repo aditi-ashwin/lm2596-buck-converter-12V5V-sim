@@ -10,8 +10,7 @@ This project contains an LTspice simulation of a step-down converter using the L
 * **Testing Conditions:** I simulated steps through different load resistors (6.67Ω, 3.33Ω, 2.22Ω, and 1.67Ω). This tests the converter's performance at different output currents, all the way up to 3 A which was the specified current output.
 
 ## Schematic
-<img width="975" height="493" alt="image" src="https://github.com/user-attachments/assets/cda6c286-9d06-41fc-9f96-00fee5a02d57" />
-
+![Schematic](images/Schematic.png)
 ### Component Selection
 * **Inductor (38µH):** Chosen to keep ripple current under 0.6 (20% or 3A) at f_{switching} = 150kHz, using $`\frac{(V_{in} - V_{out}) \cdot V_{out}}{V_{in} \cdot L \cdot f_{switching}}`$ with $`f_{switching}`$ = 150 kHz (from the LM2596 datasheet). This gives a value of about 32.4µH, but I used the specific Schott Inductor recommended from the TI Datasheet, whose value I found based on the inductor code at the [Schott Website](https://schottmagnetics.com/thru-hole-lm259x-lm267x/).
 * **Output Capacitor (330µF):** Chosen to keep output ripple voltage under 50mV (1% of 5V) given the ripple current above and the capacitor's ESR (26mΩ).
@@ -20,27 +19,27 @@ This project contains an LTspice simulation of a step-down converter using the L
 ## Data and Results
 ### Initial Simulation
 
-<img width="597" height="227" alt="image" src="https://github.com/user-attachments/assets/58e17638-5ebf-4f69-b588-16ffe02448ce" />
+![InitialGraph](images/InitialSimulation.png)
 
-I first simulated the circuit against a resistance of 1.67 ohms to measure the output current at the expected 3 A. The green curve demonstrates the movement of voltage as the converter starts up, overshoots, and then balances at 5V, while the blue curve demonstrates the current output.
+I first simulated the circuit against a resistance of 1.67 ohms to measure the output current at the expected 3 A. The green curve demonstrates the movement of voltage as the converter starts up, overshoots, and then balances at 5V.
 
-<img width="621" height="469" alt="image" src="https://github.com/user-attachments/assets/fc47b69d-37a5-4b44-a21f-b574706fb6ad" />
+![CurrentZoom](images/CurrentZoom.png)
 
 This zoomed in image of the current shows that it has a variation of about 0.5A, and stays under the 3.6 A that the components are rated for. The expected ripple current can be calculated using the previously mentioned formula $$`\frac{(V_{in} - V_{out}) \cdot V_{out}}{V_{in} \cdot L \cdot f_{switching}}`$$ which results in 0.511 A. Therefore, the graphical value remains under the expected ripple current.
 
-<img width="1894" height="434" alt="image" src="https://github.com/user-attachments/assets/960cee73-59df-4772-a02c-dbfba25c0ffb" />
+![VoltageZoom](images/VoltageZoom.png)
 
 This is the zoomed in image of the voltage, showing that it varies from 4.98V to 5V, demonstrating a stable output voltage.
 
 ### Inrush Current
 
-<img width="681" height="223" alt="image" src="https://github.com/user-attachments/assets/93b13a18-18f6-4f22-88e3-668b7c854fe1" />
+![InrushCurrent](images/InrushCurrent.png)
 
 This graph corresponds to the inrush current simulation. To ensure that the inrush current did not exceed the current ratings of the power supply, inductor, diode, and LM2596, I measured the current at the power source as the simulation started up. Specifically for the inductor, many of the inductors listed on the TI datasheet for the chip are out of production, so I decided to simulate the Schott 67148400 (L34) Inductor and its specifications.
 
 ### Step Load
 
-<img width="713" height="223" alt="image" src="https://github.com/user-attachments/assets/5754a07a-6ed5-488d-b3c4-3f91dbdcdd19" />
+![StepLoad](images/StepLoad.png)
 
 After ensuring that the circuit performed as expected, I stepped the load to determine its performance at different current draws. To measure at 25%, 50%, 75%, and 100% current draws, I used resistance values of 6.67 Ω, 3.33 Ω, 2.22 Ω, and 1.67 Ω, using .step param R_val list 6.67 3.33 2.22 1.67 to move through each. Each curve corresponds to a resistor value, with the highest peak belonging to the 6.67 Ω resistor. Its light load causes slower drain, meaning it peaks much higher before it is able to stabilize. However, it is still well under the voltage rating for each component.
 
@@ -48,7 +47,7 @@ After ensuring that the circuit performed as expected, I stepped the load to det
 
 After measuring the different loads, I measured their efficiency based on power calculated from the voltages and currents coming in and out of each resistor.
 
-<img width="1106" height="477" alt="image" src="https://github.com/user-attachments/assets/80e50989-50b2-4e68-b1a1-6a39ef03a5ed" />
+![Efficiency](images/Efficiency)
 
 The value of efficiency was calculated with the formula $$\frac{V_{out} \cdot I_{out}}{V_{in} \cdot I_{in}}$$ and used to determine how the load affects the effiicency of the circuit. The trend in the graph shows how increasing the load draw will decrease the efficiency as expected, but the efficiency is maintained at above about 89%. One thing to note is that I_In will measure as a negative number because the voltage source is supplying power, so when calculations are performed, this number should be negated.
 
